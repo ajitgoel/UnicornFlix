@@ -1,0 +1,201 @@
+type vodAsset {
+  id: ID!
+  title: String!
+  description: String!
+  genre: String
+  video: videoObject
+}
+
+type videoObject {
+  id: ID!
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelvodAssetConnection {
+  items: [vodAsset]
+  nextToken: String
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+input ModelvodAssetFilterInput {
+  id: ModelIDInput
+  title: ModelStringInput
+  description: ModelStringInput
+  genre: ModelStringInput
+  and: [ModelvodAssetFilterInput]
+  or: [ModelvodAssetFilterInput]
+  not: ModelvodAssetFilterInput
+}
+
+type Query {
+  getVodAsset(id: ID!): vodAsset
+  listVodAssets(filter: ModelvodAssetFilterInput, limit: Int, nextToken: String): ModelvodAssetConnection
+  getVideoObject(id: ID!): videoObject
+  listVideoObjects(filter: ModelvideoObjectFilterInput, limit: Int, nextToken: String): ModelvideoObjectConnection
+}
+
+input CreateVodAssetInput {
+  id: ID
+  title: String!
+  description: String!
+  genre: String
+  vodAssetVideoId: ID
+}
+
+input UpdateVodAssetInput {
+  id: ID!
+  title: String
+  description: String
+  genre: String
+  vodAssetVideoId: ID
+}
+
+input DeleteVodAssetInput {
+  id: ID
+}
+
+type Mutation {
+  createVodAsset(input: CreateVodAssetInput!, condition: ModelvodAssetConditionInput): vodAsset
+  updateVodAsset(input: UpdateVodAssetInput!, condition: ModelvodAssetConditionInput): vodAsset
+  deleteVodAsset(input: DeleteVodAssetInput!, condition: ModelvodAssetConditionInput): vodAsset
+  createVideoObject(input: CreateVideoObjectInput!, condition: ModelvideoObjectConditionInput): videoObject
+  updateVideoObject(input: UpdateVideoObjectInput!, condition: ModelvideoObjectConditionInput): videoObject
+  deleteVideoObject(input: DeleteVideoObjectInput!, condition: ModelvideoObjectConditionInput): videoObject
+}
+
+input ModelvodAssetConditionInput {
+  title: ModelStringInput
+  description: ModelStringInput
+  genre: ModelStringInput
+  and: [ModelvodAssetConditionInput]
+  or: [ModelvodAssetConditionInput]
+  not: ModelvodAssetConditionInput
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+type Subscription {
+  onCreateVodAsset: vodAsset @aws_subscribe(mutations: ["createVodAsset"])
+  onUpdateVodAsset: vodAsset @aws_subscribe(mutations: ["updateVodAsset"])
+  onDeleteVodAsset: vodAsset @aws_subscribe(mutations: ["deleteVodAsset"])
+  onCreateVideoObject: videoObject @aws_subscribe(mutations: ["createVideoObject"])
+  onUpdateVideoObject: videoObject @aws_subscribe(mutations: ["updateVideoObject"])
+  onDeleteVideoObject: videoObject @aws_subscribe(mutations: ["deleteVideoObject"])
+}
+
+type ModelvideoObjectConnection {
+  items: [videoObject]
+  nextToken: String
+}
+
+input ModelvideoObjectFilterInput {
+  id: ModelIDInput
+  and: [ModelvideoObjectFilterInput]
+  or: [ModelvideoObjectFilterInput]
+  not: ModelvideoObjectFilterInput
+}
+
+input CreateVideoObjectInput {
+  id: ID
+}
+
+input UpdateVideoObjectInput {
+  id: ID!
+}
+
+input DeleteVideoObjectInput {
+  id: ID
+}
+
+input ModelvideoObjectConditionInput {
+  and: [ModelvideoObjectConditionInput]
+  or: [ModelvideoObjectConditionInput]
+  not: ModelvideoObjectConditionInput
+}

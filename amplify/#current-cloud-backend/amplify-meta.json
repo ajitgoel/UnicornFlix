@@ -1,0 +1,106 @@
+{
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "amplify-unicornflix-dev-224923-authRole",
+			"UnauthRoleArn": "arn:aws:iam::529627678433:role/amplify-unicornflix-dev-224923-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::529627678433:role/amplify-unicornflix-dev-224923-authRole",
+			"Region": "us-east-1",
+			"DeploymentBucketName": "amplify-unicornflix-dev-224923-deployment",
+			"UnauthRoleName": "amplify-unicornflix-dev-224923-unauthRole",
+			"StackName": "amplify-unicornflix-dev-224923",
+			"StackId": "arn:aws:cloudformation:us-east-1:529627678433:stack/amplify-unicornflix-dev-224923/1be202c0-7a15-11ea-a251-12505ef78976",
+			"AmplifyAppId": "d1rf9fmdmlo1w8"
+		}
+	},
+	"auth": {
+		"unicornflixdd71449e": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-unicornflix-dev-224923-deployment/amplify-cfn-templates/auth/unicornflixdd71449e-cloudformation-template.yml",
+				"logicalId": "authunicornflixdd71449e"
+			},
+			"lastPushTimeStamp": "2020-04-10T04:33:29.156Z",
+			"output": {
+				"AppClientSecret": "mk5e60acu90r8cm9feel04rb5lu1btu699jf5ib2dvv6st28cck",
+				"UserPoolId": "us-east-1_aedLyFgTA",
+				"AppClientIDWeb": "1o42s0obamcdff6mqduq1tur35",
+				"AppClientID": "8lfq37okofntjqa622htkr41n",
+				"IdentityPoolId": "us-east-1:8ef2eed7-ea66-4a66-b5e1-e2dabe5268da",
+				"IdentityPoolName": "unicornflixdd71449e_identitypool_dd71449e__dev",
+				"UserPoolName": "unicornflixdd71449e_userpool_dd71449e"
+			},
+			"lastPushDirHash": "Foc3OBt3H1zhFHfqHYjBe+YLm/M="
+		},
+		"userPoolGroups": {
+			"service": "Cognito-UserPool-Groups",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "auth",
+					"resourceName": "unicornflixdd71449e",
+					"attributes": [
+						"UserPoolId",
+						"AppClientIDWeb",
+						"AppClientID",
+						"IdentityPoolId"
+					]
+				}
+			],
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-unicornflix-dev-224923-deployment/amplify-cfn-templates/auth/template.json",
+				"logicalId": "authuserPoolGroups"
+			},
+			"lastPushTimeStamp": "2020-04-10T04:33:29.162Z",
+			"output": {
+				"AdminGroupRole": "arn:aws:iam::529627678433:role/us-east-1_aedLyFgTA-AdminGroupRole"
+			},
+			"lastPushDirHash": "VDfHlgp787hOg4n8vjtKPxWcan4="
+		}
+	},
+	"api": {
+		"unicornflix": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [],
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authunicornflixdd71449e"
+						}
+					}
+				},
+				"GraphQLAPIIdOutput": "ayztpb3ilfgwpi5rbg7lkximrq",
+				"GraphQLAPIEndpointOutput": "https://oppui5mppzbh7nbqanfthrvhsi.appsync-api.us-east-1.amazonaws.com/graphql"
+			},
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-unicornflix-dev-224923-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"logicalId": "apiunicornflix"
+			},
+			"lastPushTimeStamp": "2020-04-10T04:33:33.557Z",
+			"lastPushDirHash": "juTFD9oadbRlSYUH3SZ8EST33qM="
+		}
+	},
+	"video": {
+		"unicornflix": {
+			"service": "video",
+			"serviceType": "video-on-demand",
+			"providerPlugin": "awscloudformation",
+			"sha": "cccfda429c83ee304b9a55d72fd3394ea32522ee",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-unicornflix-dev-224923-deployment/amplify-cfn-templates/video/unicornflix-vod-workflow.template",
+				"logicalId": "videounicornflix"
+			},
+			"lastPushTimeStamp": "2020-04-10T04:33:29.173Z",
+			"output": {
+				"oVodOutputUrl": "unicornflix-dev-output-7px1hk4r.s3.us-east-1.amazonaws.com",
+				"oVODOutputS3": "unicornflix-dev-output-7px1hk4r",
+				"oVODInputS3": "unicornflix-dev-input-7px1hk4r"
+			},
+			"lastPushDirHash": "0S16DwO+dshPU08tQrHXopY6Ars="
+		}
+	}
+}
